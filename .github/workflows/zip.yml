@@ -9,10 +9,13 @@ jobs:
   build_zip_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
+      - uses: actions/checkout@v1
+      - run: composer install --ansi --no-progress --no-interaction --prefer-dist
+      - run: mkdir dist-zip
+      - uses: montudor/action-zip@v0.1.0
         with:
-          filename: "dist.zip"
-          exclusions: "*.git* /*node_modules/* .editorconfig"
-          path: "dist"
+          args: zip -qq -r ./dist-zip/dist.zip ./dist
+      - uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist-zip
