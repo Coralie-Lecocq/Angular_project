@@ -9,13 +9,9 @@ jobs:
   build_zip_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Create Zip File - dist
-        uses: actions/checkout@v1
-        run: mkdir dist-zip
-        uses: montudor/action-zip@v0.1.0
+      - uses: actions/checkout@master
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
         with:
-          args: zip -qq -r ./dist.zip ./dist
-        uses: actions/upload-artifact@master
-        with:
-          name: vendor
-          path: vendor-zip
+          filename: "dist.zip"
+          path: "./dist"
