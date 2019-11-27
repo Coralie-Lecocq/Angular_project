@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: mkdir dist-zip
+      - run: mkdir test-zip
       - uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./dist-zip/dist.zip ./dist
+          args: zip -qq -r ./test-zip/test.zip ./test
       - uses: actions/upload-artifact@master
         with:
-          name: dist
-          path: dist-zip
+          name: test
+          path: test-zip
