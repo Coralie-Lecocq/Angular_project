@@ -15,4 +15,4 @@ jobs:
         with:
           filename: "dist.zip"
           exclusions: "*.git* /*node_modules/* .editorconfig"
-          path: "./dist"
+          path: "dist"
