@@ -1,4 +1,4 @@
-name: Deploy ext
+name: Build
 
 on:
   push:
@@ -9,7 +9,13 @@ jobs:
   build_zip_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Create Zip File - dist
-        uses: montudor/action-zip@v0.1.0
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: build
+        run: |
+          yarn run build
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
         with:
-          args: zip -qq -r ./dist.zip ./dist
+          name: dist
+          path: dist
