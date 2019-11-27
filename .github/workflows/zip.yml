@@ -9,8 +9,6 @@ jobs:
   build_zip_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Build extension
-        run: ng serve
       - name: Create Zip File - dist
         uses: montudor/action-zip@v0.1.0
         with:
