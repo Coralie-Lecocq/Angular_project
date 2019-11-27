@@ -1,4 +1,4 @@
-name: Deploy ext
+name: CI
 
 on:
   push:
@@ -9,12 +9,14 @@ jobs:
   build_zip_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: mkdir dist-zip
-      - uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./dist-zip/dist.zip ./dist
-      - uses: actions/upload-artifact@master
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: ng serve
+        run: |
+          yarn install
+          ng serve
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
         with:
           name: dist
-          path: dist-zip
+          path: dist
